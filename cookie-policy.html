@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy — AETHON Agency</title>
+    <meta name="description" content="Informativa sui cookie di Aethon Agency - SV International Di Samuele Vazzoler">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0b0f'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='18' fill='%23c8ff00'%3EA%3C/text%3E%3C/svg%3E">
+    <meta name="theme-color" content="#0b0b0f">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0b0b0f;
+            --bg2: #101016;
+            --white: #f5f5f5;
+            --gray: #999;
+            --muted: #555;
+            --accent: #c8ff00;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--gray);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::selection { background: var(--accent); color: var(--bg); }
+        .nav {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 20px 50px;
+            display: flex; align-items: center; justify-content: space-between;
+            z-index: 100;
+            background: rgba(11,11,15,0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem; font-weight: 700;
+            color: var(--white); text-decoration: none;
+        }
+        .nav-logo span { color: var(--accent); }
+        .nav-back {
+            font-size: 0.78rem; color: var(--muted);
+            text-decoration: none; transition: color 0.3s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .nav-back:hover { color: var(--accent); }
+        .nav-back svg {
+            width: 16px; height: 16px; stroke: currentColor;
+            fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .legal-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 140px 40px 80px;
+        }
+        .legal-label {
+            font-size: 0.65rem; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 14px;
+        }
+        .legal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700; color: var(--white);
+            letter-spacing: -2px; line-height: 1.1;
+            margin-bottom: 12px;
+        }
+        .legal-updated {
+            font-size: 0.78rem; color: var(--muted);
+            margin-bottom: 50px;
+        }
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem; font-weight: 600;
+            color: var(--white); letter-spacing: -0.5px;
+            margin: 50px 0 16px;
+        }
+        h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.05rem; font-weight: 600;
+            color: rgba(245,245,245,0.8);
+            margin: 30px 0 10px;
+        }
+        p { margin-bottom: 14px; font-size: 0.9rem; }
+        ul { margin: 10px 0 14px 20px; font-size: 0.9rem; }
+        li { margin-bottom: 6px; }
+        a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+        strong { color: var(--white); font-weight: 600; }
+        .legal-divider {
+            width: 60px; height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            margin: 50px 0;
+        }
+        /* Cookie table */
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 30px;
+            font-size: 0.82rem;
+        }
+        .cookie-table th {
+            text-align: left;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.03);
+            color: var(--white);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .cookie-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            vertical-align: top;
+        }
+        .cookie-table tr:hover td {
+            background: rgba(255,255,255,0.015);
+        }
+        .cookie-type {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .cookie-type.tecnico { background: rgba(200,255,0,0.1); color: var(--accent); }
+        .cookie-type.analitico { background: rgba(0,229,255,0.1); color: #00e5ff; }
+        .cookie-type.profilazione { background: rgba(255,100,100,0.1); color: #ff6464; }
+
+        .legal-footer {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 40px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.72rem;
+            color: var(--muted);
+            display: flex; justify-content: space-between;
+        }
+        .legal-footer a {
+            color: var(--muted); text-decoration: none;
+            transition: color 0.3s;
+        }
+        .legal-footer a:hover { color: var(--accent); }
+        .legal-footer-links { display: flex; gap: 20px; }
+
+        @media (max-width: 768px) {
+            .nav { padding: 16px 24px; }
+            .legal-page { padding: 110px 24px 60px; }
+            .legal-title { font-size: 1.8rem; letter-spacing: -1px; }
+            h2 { font-size: 1.15rem; }
+            .cookie-table { font-size: 0.75rem; }
+            .cookie-table th, .cookie-table td { padding: 10px 10px; }
+            .legal-footer { flex-direction: column; gap: 10px; padding: 24px; text-align: center; }
+            .legal-footer-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="aethon-agency-cinematic.html" class="nav-logo">AETHON<span>.</span></a>
+        <a href="aethon-agency-cinematic.html" class="nav-back">
+            <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Torna al sito
+        </a>
+    </nav>
+
+    <main class="legal-page">
+        <div class="legal-label">Informativa</div>
+        <h1 class="legal-title">Cookie Policy</h1>
+        <p class="legal-updated">Ultimo aggiornamento: 1 Aprile 2026</p>
+
+        <p>La presente Cookie Policy viene resa ai sensi dell'<strong>art. 122 del D.Lgs. 196/2003</strong> (Codice Privacy), delle <strong>Linee Guida del Garante per la protezione dei dati personali</strong> n. 231 del 10 giugno 2021 sui cookie e altri strumenti di tracciamento, nonché del <strong>Regolamento UE 2016/679</strong> (GDPR), e descrive le modalità di utilizzo dei cookie sul sito web <strong>aethon.agency</strong> gestito da SV International Di Samuele Vazzoler (P.IVA 12208390968).</p>
+
+        <h2>1. Cosa Sono i Cookie</h2>
+        <p>I cookie sono piccoli file di testo che i siti web visitati inviano al terminale dell'utente (computer, tablet, smartphone), dove vengono memorizzati per essere poi ritrasmessi agli stessi siti alla visita successiva. I cookie sono utilizzati per diverse finalità, tra cui memorizzare le preferenze dell'utente, migliorare l'esperienza di navigazione e raccogliere informazioni statistiche aggregate.</p>
+
+        <h2>2. Tipologie di Cookie Utilizzati</h2>
+
+        <h3>a) Cookie Tecnici (non richiedono consenso)</h3>
+        <p>Sono cookie necessari al funzionamento del sito web e alla fornitura del servizio richiesto dall'utente. Senza questi cookie, alcune funzionalità del sito potrebbero non essere disponibili. Ai sensi dell'<strong>art. 122, comma 1</strong> del Codice Privacy, questi cookie non richiedono il consenso preventivo dell'utente.</p>
+
+        <table class="cookie-table">
+            <thead>
+                <tr>
+                    <th>Cookie</th>
+                    <th>Tipo</th>
+                    <th>Finalità</th>
+                    <th>Durata</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>cookie_consent</td>
+                    <td><span class="cookie-type tecnico">Tecnico</span></td>
+                    <td>Memorizza la preferenza dell'utente riguardo al consenso dei cookie</td>
+                    <td>12 mesi</td>
+                </tr>
+                <tr>
+                    <td>session_id</td>
+                    <td><span class="cookie-type tecnico">Tecnico</span></td>
+                    <td>Gestisce la sessione di navigazione dell'utente</td>
+                    <td>Sessione</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>b) Cookie Analitici (richiedono consenso)</h3>
+        <p>Sono cookie utilizzati per raccogliere informazioni sull'utilizzo del sito da parte degli utenti in forma aggregata e anonima. Questi cookie ci permettono di analizzare le visite al sito, le pagine più visualizzate, i tempi di permanenza e le sorgenti di traffico, al fine di migliorare i contenuti e le prestazioni del sito. Vengono installati solo previo consenso dell'utente.</p>
+
+        <table class="cookie-table">
+            <thead>
+                <tr>
+                    <th>Cookie</th>
+                    <th>Tipo</th>
+                    <th>Finalità</th>
+                    <th>Durata</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>_ga</td>
+                    <td><span class="cookie-type analitico">Analitico</span></td>
+                    <td>Google Analytics — distingue gli utenti univoci assegnando un numero generato casualmente</td>
+                    <td>24 mesi</td>
+                </tr>
+                <tr>
+                    <td>_ga_*</td>
+                    <td><span class="cookie-type analitico">Analitico</span></td>
+                    <td>Google Analytics 4 — mantiene lo stato della sessione</td>
+                    <td>24 mesi</td>
+                </tr>
+                <tr>
+                    <td>_gid</td>
+                    <td><span class="cookie-type analitico">Analitico</span></td>
+                    <td>Google Analytics — distingue gli utenti</td>
+                    <td>24 ore</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>c) Cookie di Profilazione di Terze Parti (richiedono consenso)</h3>
+        <p>Sono cookie utilizzati per tracciare la navigazione dell'utente in rete e creare profili sui suoi gusti, abitudini, scelte, ecc. Con questi cookie possono essere trasmessi al terminale dell'utente messaggi pubblicitari in linea con le preferenze già manifestate nella navigazione online. Vengono installati solo previo esplicito consenso dell'utente.</p>
+        <p>Al momento il sito non utilizza cookie di profilazione di terze parti. Qualora venissero introdotti in futuro, la presente policy sarà aggiornata e il consenso sarà richiesto preventivamente.</p>
+
+        <h2>3. Base Giuridica</h2>
+        <p>Il trattamento dei dati mediante cookie tecnici è basato sul <strong>legittimo interesse</strong> del Titolare (art. 6, par. 1, lett. f) GDPR) e non richiede il consenso dell'utente. Per i cookie analitici e di profilazione, la base giuridica è il <strong>consenso</strong> dell'utente (art. 6, par. 1, lett. a) GDPR), espresso attraverso il banner cookie presente alla prima visita del sito.</p>
+
+        <h2>4. Consenso</h2>
+        <p>Alla prima visita del sito viene mostrato un banner informativo che consente all'utente di:</p>
+        <ul>
+            <li><strong>Accettare</strong> tutti i cookie (tecnici + analitici).</li>
+            <li><strong>Rifiutare</strong> i cookie non tecnici, accettando solo quelli strettamente necessari al funzionamento.</li>
+        </ul>
+        <p>Il consenso prestato può essere revocato in qualsiasi momento contattando il Titolare all'indirizzo <a href="mailto:info@aethon.agency">info@aethon.agency</a> o cancellando i cookie attraverso le impostazioni del proprio browser.</p>
+
+        <h2>5. Come Gestire e Disabilitare i Cookie</h2>
+        <p>L'utente può gestire le preferenze relative ai cookie direttamente tramite le impostazioni del proprio browser. Di seguito i link alle istruzioni per i browser più diffusi:</p>
+        <ul>
+            <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
+            <li><a href="https://support.mozilla.org/it/kb/protezione-antitracciamento-avanzata-firefox-desktop" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+            <li><a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Apple Safari</a></li>
+            <li><a href="https://support.microsoft.com/it-it/microsoft-edge/eliminare-i-cookie-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a></li>
+        </ul>
+        <p>Si segnala che la disabilitazione dei cookie tecnici potrebbe compromettere il corretto funzionamento di alcune sezioni del sito.</p>
+
+        <h2>6. Cookie di Terze Parti</h2>
+        <p>Il sito si avvale di servizi di terze parti che potrebbero installare cookie sul terminale dell'utente. Il Titolare non ha controllo diretto sui cookie installati da terze parti. Per informazioni sulle modalità di trattamento dei dati da parte dei fornitori terzi, si rimanda alle rispettive informative sulla privacy:</p>
+        <ul>
+            <li><strong>Google Analytics</strong> (Google LLC): <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> — <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Opt-out</a></li>
+            <li><strong>Google Fonts</strong> (Google LLC): <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> — utilizzato per il caricamento dei font del sito</li>
+        </ul>
+
+        <h2>7. Trasferimento Dati Extra-UE</h2>
+        <p>Alcuni cookie di terze parti potrebbero comportare il trasferimento di dati verso paesi al di fuori dello Spazio Economico Europeo (in particolare gli USA per i servizi Google). Tali trasferimenti avvengono sulla base delle <strong>Clausole Contrattuali Standard</strong> approvate dalla Commissione Europea (art. 46, par. 2, lett. c) GDPR) o del <strong>EU-US Data Privacy Framework</strong> (DPF), ove applicabile.</p>
+
+        <h2>8. Periodo di Conservazione</h2>
+        <p>I dati raccolti tramite cookie sono conservati per i periodi indicati nella tabella di cui al paragrafo 2 della presente policy. Al termine del periodo di conservazione, i cookie vengono automaticamente cancellati.</p>
+
+        <h2>9. Diritti dell'Interessato</h2>
+        <p>L'utente può esercitare i diritti previsti dagli <strong>artt. 15-22 del GDPR</strong> (accesso, rettifica, cancellazione, limitazione, portabilità, opposizione) contattando il Titolare all'indirizzo <a href="mailto:info@aethon.agency">info@aethon.agency</a>. Per una descrizione completa dei diritti, si rimanda alla <a href="privacy-policy.html">Privacy Policy</a>.</p>
+
+        <h2>10. Modifiche alla Cookie Policy</h2>
+        <p>Il Titolare si riserva il diritto di modificare la presente Cookie Policy in qualsiasi momento. Le modifiche saranno pubblicate su questa pagina con indicazione della data di ultimo aggiornamento. Si invita l'utente a consultare periodicamente questa pagina.</p>
+
+        <div class="legal-divider"></div>
+
+        <p>Per qualsiasi domanda relativa all'utilizzo dei cookie, contattare: <a href="mailto:info@aethon.agency">info@aethon.agency</a>.</p>
+    </main>
+
+    <footer class="legal-footer">
+        <span>&copy; 2026 SV International Di Samuele Vazzoler — P.IVA 12208390968</span>
+        <div class="legal-footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="cookie-policy.html">Cookie Policy</a>
+            <a href="termini-servizio.html">Termini di Servizio</a>
+        </div>
+    </footer>
+
+</body>
+</html>
