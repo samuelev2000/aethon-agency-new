@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio — AETHON Agency</title>
+    <meta name="description" content="Portfolio di Aethon Agency: siti web, web app, SaaS e agenti AI realizzati per i nostri clienti.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0b0f'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='18' fill='%23c8ff00'%3EA%3C/text%3E%3C/svg%3E">
+    <meta name="theme-color" content="#0b0b0f">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0b0b0f;
+            --bg2: #101016;
+            --white: #f5f5f5;
+            --gray: #999;
+            --muted: #555;
+            --accent: #c8ff00;
+            --accent2: #00e5ff;
+            --accent-glow: rgba(200, 255, 0, 0.15);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1,h2,h3 { font-family: 'Space Grotesk', sans-serif; }
+        a { text-decoration: none; color: inherit; }
+        ::selection { background: var(--accent); color: var(--bg); }
+
+        /* NAV */
+        .nav {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 20px 50px;
+            display: flex; align-items: center; justify-content: space-between;
+            z-index: 100;
+            background: rgba(11,11,15,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem; font-weight: 700;
+        }
+        .nav-logo span { color: var(--accent); }
+        .nav-back {
+            font-size: 0.78rem; color: var(--muted);
+            transition: color 0.3s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .nav-back:hover { color: var(--accent); }
+        .nav-back svg {
+            width: 16px; height: 16px; stroke: currentColor;
+            fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        /* HERO */
+        .portfolio-hero {
+            padding: 180px 50px 80px;
+            text-align: center;
+            position: relative;
+        }
+        .portfolio-hero::before {
+            content: '';
+            position: absolute;
+            width: 700px; height: 700px;
+            border-radius: 50%;
+            background: var(--accent);
+            filter: blur(280px);
+            opacity: 0.035;
+            top: -20%; left: 30%;
+            pointer-events: none;
+        }
+        .hero-label {
+            font-size: 0.65rem; letter-spacing: 5px;
+            text-transform: uppercase; color: var(--accent);
+            margin-bottom: 16px;
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700; letter-spacing: -3px;
+            line-height: 1.05; margin-bottom: 20px;
+        }
+        .hero-title .serif {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic; font-weight: 400;
+        }
+        .hero-desc {
+            font-size: 1rem; color: var(--gray);
+            line-height: 1.7; max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* FILTER TABS */
+        .filter-bar {
+            display: flex; justify-content: center;
+            gap: 10px; padding: 0 50px 60px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--muted);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.78rem; font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .filter-btn:hover { border-color: rgba(200,255,0,0.2); color: var(--gray); }
+        .filter-btn.active {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+
+        /* PROJECT GRID */
+        .projects-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px 100px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            background: var(--bg2);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: border-color 0.4s;
+        }
+        .project-card:hover {
+            border-color: rgba(200,255,0,0.15);
+        }
+        .project-card:nth-child(even) {
+            direction: rtl;
+        }
+        .project-card:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        /* Preview area */
+        .project-preview {
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            background: #080810;
+        }
+        .project-desktop-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .project-card:hover .project-desktop-img {
+            transform: scale(1.04);
+        }
+        .project-mobile-float {
+            position: absolute;
+            bottom: -5px; right: 30px;
+            width: 120px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(255,255,255,0.08),
+                0 0 40px rgba(0,0,0,0.3);
+            transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+            z-index: 3;
+        }
+        .project-card:hover .project-mobile-float {
+            transform: translateY(-14px);
+        }
+        .project-card:nth-child(even) .project-mobile-float {
+            right: auto; left: 30px;
+        }
+        .project-mobile-float img {
+            width: 100%; display: block;
+        }
+        .project-preview-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(8,8,16,0.7) 100%);
+            pointer-events: none; z-index: 2;
+        }
+
+        /* Info area */
+        .project-info {
+            padding: 60px 50px;
+            display: flex; flex-direction: column;
+            justify-content: center;
+        }
+        .project-category {
+            font-size: 0.65rem; letter-spacing: 3px;
+            text-transform: uppercase; font-weight: 600;
+            margin-bottom: 16px;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .project-category .dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+        }
+        .cat-sitoweb .dot { background: var(--accent); }
+        .cat-sitoweb { color: var(--accent); }
+        .cat-webapp .dot { background: var(--accent2); }
+        .cat-webapp { color: var(--accent2); }
+        .cat-saas .dot { background: #ff6464; }
+        .cat-saas { color: #ff6464; }
+        .cat-ai .dot { background: #ffc800; }
+        .cat-ai { color: #ffc800; }
+
+        .project-name {
+            font-size: 2rem; font-weight: 700;
+            letter-spacing: -1.5px; margin-bottom: 16px;
+            line-height: 1.15;
+        }
+        .project-desc {
+            font-size: 0.92rem; color: var(--gray);
+            line-height: 1.8; margin-bottom: 28px;
+        }
+
+        .project-tech-stack {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            margin-bottom: 30px;
+        }
+        .project-tech-stack span {
+            padding: 6px 14px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            font-size: 0.72rem;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+        }
+
+        .project-stats {
+            display: flex; gap: 30px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+        .project-stat {
+            display: flex; flex-direction: column; gap: 2px;
+        }
+        .project-stat-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem; font-weight: 700;
+            color: var(--white);
+        }
+        .project-stat-label {
+            font-size: 0.65rem; color: var(--muted);
+            letter-spacing: 1px; text-transform: uppercase;
+        }
+
+        /* CTA */
+        .portfolio-cta {
+            text-align: center;
+            padding: 60px 50px 120px;
+        }
+        .portfolio-cta p {
+            font-size: 1.1rem; color: var(--gray);
+            margin-bottom: 30px;
+        }
+        .cta-link {
+            display: inline-flex; align-items: center; gap: 12px;
+            padding: 18px 44px;
+            background: var(--accent); color: var(--bg);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.88rem; font-weight: 600;
+            letter-spacing: 1px; text-transform: uppercase;
+            border-radius: 60px;
+            transition: all 0.4s;
+        }
+        .cta-link:hover {
+            box-shadow: 0 0 50px var(--accent-glow);
+            transform: translateY(-3px);
+        }
+        .cta-link svg {
+            width: 18px; height: 18px; fill: none;
+            stroke: var(--bg); stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        /* FOOTER */
+        .pf-footer {
+            padding: 30px 50px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            display: flex; justify-content: space-between;
+            align-items: center;
+            font-size: 0.72rem; color: var(--muted);
+        }
+        .pf-footer a {
+            color: var(--muted); transition: color 0.3s;
+        }
+        .pf-footer a:hover { color: var(--accent); }
+        .pf-footer-links { display: flex; gap: 20px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .project-card { grid-template-columns: 1fr; }
+            .project-card:nth-child(even) { direction: ltr; }
+            .project-preview { min-height: 280px; }
+            .project-info { padding: 40px 36px; }
+        }
+        @media (max-width: 768px) {
+            .nav { padding: 16px 24px; }
+            .portfolio-hero { padding: 130px 24px 50px; }
+            .hero-title { font-size: 2rem; letter-spacing: -1.5px; }
+            .hero-desc { font-size: 0.88rem; }
+            .filter-bar { padding: 0 24px 40px; gap: 8px; }
+            .filter-btn { padding: 8px 18px; font-size: 0.72rem; }
+            .projects-grid { padding: 0 20px 80px; gap: 40px; }
+            .project-card { border-radius: 16px; }
+            .project-preview { min-height: 220px; }
+            .project-mobile-float { width: 90px; right: 20px; border-radius: 12px; }
+            .project-card:nth-child(even) .project-mobile-float { left: 20px; }
+            .project-info { padding: 28px 24px; }
+            .project-name { font-size: 1.4rem; letter-spacing: -0.5px; }
+            .project-desc { font-size: 0.85rem; margin-bottom: 20px; }
+            .project-stats { gap: 20px; }
+            .portfolio-cta { padding: 40px 24px 80px; }
+            .pf-footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px; }
+            .pf-footer-links { justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.7rem; }
+            .project-preview { min-height: 180px; }
+            .project-mobile-float { width: 75px; }
+            .project-name { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="aethon-agency-cinematic.html" class="nav-logo">AETHON<span>.</span></a>
+        <a href="aethon-agency-cinematic.html" class="nav-back">
+            <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Torna al sito
+        </a>
+    </nav>
+
+    <section class="portfolio-hero">
+        <div class="hero-label">I Nostri Lavori</div>
+        <h1 class="hero-title">Progetti che parlano da <span class="serif">soli</span></h1>
+        <p class="hero-desc">Una selezione dei nostri lavori più recenti. Ogni progetto è un'esperienza digitale unica, costruita su misura per i nostri clienti.</p>
+    </section>
+
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">Tutti</button>
+        <button class="filter-btn" data-filter="sitoweb">Siti Web</button>
+        <button class="filter-btn" data-filter="webapp">Web App</button>
+        <button class="filter-btn" data-filter="saas">SaaS</button>
+        <button class="filter-btn" data-filter="ai">Agenti AI</button>
+    </div>
+
+    <div class="projects-grid">
+
+        <!-- 1. SITO WEB — Bellavista -->
+        <div class="project-card" data-category="sitoweb">
+            <div class="project-preview">
+                <img class="project-desktop-img" src="https://ytrnunswsbgyghzyhyqs.supabase.co/storage/v1/object/public/product-images/nano-banana/5ad792cd-a81f-402d-b0d3-1b6414b30af6/68f480c61ac114103399963d4e8cc68f-1775033931410.png" alt="Bellavista Desktop" loading="lazy">
+                <div class="project-preview-overlay"></div>
+                <div class="project-mobile-float">
+                    <img src="https://ytrnunswsbgyghzyhyqs.supabase.co/storage/v1/object/public/product-images/nano-banana/5ad792cd-a81f-402d-b0d3-1b6414b30af6/0f3babc195603641ed963e4ee66af2e0-1775034036713.png" alt="Bellavista Mobile" loading="lazy">
+                </div>
+            </div>
+            <div class="project-info">
+                <div class="project-category cat-sitoweb"><span class="dot"></span> Sito Web</div>
+                <h2 class="project-name">Bellavista — Ristorante di Lusso</h2>
+                <p class="project-desc">Sito web elegante per un ristorante fine dining italiano. Hero immersiva con fotografia culinaria, sistema di prenotazione online integrato, menù interattivo e gallery fotografica con animazioni GSAP. Design dark e raffinato con accenti dorati che riflettono l'atmosfera esclusiva del locale.</p>
+                <div class="project-tech-stack">
+                    <span>WordPress</span><span>Custom Theme</span><span>GSAP</span><span>SEO</span><span>UI/UX Design</span>
+                </div>
+                <div class="project-stats">
+                    <div class="project-stat">
+                        <span class="project-stat-num">+180%</span>
+                        <span class="project-stat-label">Prenotazioni</span>
+                    </div>
+                    <div class="project-stat">
+                        <span class="project-stat-num">3.2s</span>
+                        <span class="project-stat-label">Load Time</span>
+                    </div>
+                    <div class="project-stat">
+                        <span class="project-stat-num">98</span>
+                        <span class="project-stat-label">Lighthouse</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. WEB APP — FlowBoard -->
+        <div class="project-card" data-category="webapp">
+            <div class="project-preview">
+                <img class="project-desktop-img" src="https://ytrnunswsbgyghzyhyqs.supabase.co/storage/v1/object/public/product-images/nano-banana/5ad792cd-a81f-402d-b0d3-1b6414b30af6/6d031479b64e15d1cac8016dd2f3a646-1775034060400.png" alt="FlowBoard Desktop" loading="lazy">
+                <div class="project-preview-overlay"></div>
+                <div class="project-mobile-float">
+                    <img src="https://ytrnunswsbgyghzyhyqs.supabase.co/storage/v1/object/public/product-images/nano-banana/5ad792cd-a81f-402d-b0d3-1b6414b30af6/44c70fa237638e3fde5d08f0a8c54506-1775034040999.png" alt="FlowBoard Mobile" loading="lazy">
+                </div>
+            </div>
+            <div class="project-info">
+                <div class="project-category cat-webapp"><span class="dot"></span> Web App</div>
+                <h2 class="project-name">FlowBoard — Project Management</h2>
+                <p class="project-desc">Web application completa per la gestione progetti con board Kanban drag-and-drop, assegnazione task, time tracking integrato e reporting automatizzato. Dashboard con metriche in tempo reale, gestione team e integrazioni con Slack e Google Workspace.</p>
+                <div class="project-tech-stack">
+                    <span>React</span><span>Node.js</span><span>Supabase</span><span>Tailwind</span><span>WebSocket</span>
+                </div>
+                <div class="project-stats">
+                    <div class="project-stat">
+                        <span class="project-stat-num">500+</span>
+                        <span class="project-stat-label">Utenti Attivi</span>
+                    </div>
+                    <div class="project-stat">
+                        <span class="project-stat-num">-40%</span>
+                        <span class="project-stat-label">Tempi Gestione</span>
+                    </div>
+                    <div class="project-stat">
+                        <span class="project-stat-num">99.9%</span>
+                        <span class="project-stat-label">Uptime</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. SAAS — FitPulse -->
+        <div class="project-card" data-category="saas">
+            <div class="project-preview">
+                <img class="project-desktop-img" src="https://ytrnunswsbgyghzyhyqs.supabase.co/storage/v1/object/public/product-images/nano-banana/5ad792cd-a81f-402d-b0d3-1b6414b30af6/d9cfcbb0572afde656655c5c64b3ede3-1775033995878.png" alt="FitPulse Desktop" loading="lazy">
+                <div class="project-preview-overlay"></div>
+                <div class="project-mobile-float">
+                    <img src="https://ytrnunswsbgyghzyhyqs.supabase.co/storage/v1/object/public/product-images/nano-banana/5ad792cd-a81f-402d-b0d3-1b6414b30af6/68d3f5c3e884b1df77abd78927033f7b-1775034045605.png" alt="FitPulse Mobile" loading="lazy">
+                </div>
+            </div>
+            <div class="project-info">
+                <div class="project-category cat-saas"><span class="dot"></span> SaaS Platform</div>
+                <h2 class="project-name">FitPulse — Fitness Subscription</h2>
+                <p class="project-desc">Piattaforma SaaS multi-tenant per abbonamenti fitness. Landing page con pricing tiers, dashboard analytics per palestre, gestione pagamenti ricorrenti Stripe, tracking allenamenti utenti e sistema di referral. Oltre 10.000 utenti attivi con un churn rate inferiore al 3%.</p>
+                <div class="project-tech-stack">
+                    <span>Next.js</span><span>Stripe</span><span>PostgreSQL</span><span>Redis</span><span>AWS</span>
+                </div>
+                <div class="project-stats">
+                    <div class="project-stat">
+                        <span class="project-stat-num">10K+</span>
+                        <span class="project-stat-label">Utenti</span>
+                    </div>
+                    <div class="project-stat">
+                        <span class="project-stat-num">&lt;3%</span>
+                        <span class="project-stat-label">Churn Rate</span>
+                    </div>
+                    <div class="project-stat">
+                        <span class="project-stat-num">€2.4M</span>
+                        <span class="project-stat-label">ARR Gestito</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. AGENTE AI — NexaBot -->
+        <div class="project-card" data-category="ai">
+            <div class="project-preview">
+                <img class="project-desktop-img" src="https://ytrnunswsbgyghzyhyqs.supabase.co/storage/v1/object/public/product-images/nano-banana/5ad792cd-a81f-402d-b0d3-1b6414b30af6/4a5f2a6719b6b16661da703f4fb52448-1775034000303.png" alt="NexaBot Desktop" loading="lazy">
+                <div class="project-preview-overlay"></div>
+                <div class="project-mobile-float">
+                    <img src="https://ytrnunswsbgyghzyhyqs.supabase.co/storage/v1/object/public/product-images/nano-banana/5ad792cd-a81f-402d-b0d3-1b6414b30af6/e9cada98db14ecfdaffdce90784c8793-1775034049402.png" alt="NexaBot Mobile" loading="lazy">
+                </div>
+            </div>
+            <div class="project-info">
+                <div class="project-category cat-ai"><span class="dot"></span> Agente AI</div>
+                <h2 class="project-name">NexaBot — Customer Service AI</h2>
+                <p class="project-desc">Agente conversazionale intelligente con architettura RAG per l'assistenza clienti. Gestisce il 70% delle richieste in completa autonomia con risposte contestuali, escalation intelligente e dashboard di monitoraggio real-time. Interfaccia chat dark mode con analytics integrati.</p>
+                <div class="project-tech-stack">
+                    <span>LLM</span><span>Python</span><span>RAG</span><span>Pinecone</span><span>FastAPI</span>
+                </div>
+                <div class="project-stats">
+                    <div class="project-stat">
+                        <span class="project-stat-num">70%</span>
+                        <span class="project-stat-label">Automazione</span>
+                    </div>
+                    <div class="project-stat">
+                        <span class="project-stat-num">&lt;2s</span>
+                        <span class="project-stat-label">Tempo Risposta</span>
+                    </div>
+                    <div class="project-stat">
+                        <span class="project-stat-num">4.8/5</span>
+                        <span class="project-stat-label">Soddisfazione</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="portfolio-cta">
+        <p>Hai un progetto in mente? Parliamone.</p>
+        <a href="aethon-agency-cinematic.html#contact" class="cta-link">
+            Inizia il tuo progetto
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+    </section>
+
+    <footer class="pf-footer">
+        <span>&copy; 2026 SV International Di Samuele Vazzoler — P.IVA 12208390968</span>
+        <div class="pf-footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="cookie-policy.html">Cookie Policy</a>
+            <a href="termini-servizio.html">Termini</a>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero reveal
+        gsap.from('.hero-label', { opacity: 0, y: 20, duration: 0.6, delay: 0.2 });
+        gsap.from('.hero-title', { opacity: 0, y: 30, duration: 0.7, delay: 0.35 });
+        gsap.from('.hero-desc', { opacity: 0, y: 20, duration: 0.6, delay: 0.5 });
+        gsap.from('.filter-bar', { opacity: 0, y: 15, duration: 0.5, delay: 0.65 });
+
+        // Project cards scroll reveal
+        document.querySelectorAll('.project-card').forEach((card, i) => {
+            gsap.to(card, {
+                opacity: 1, y: 0, duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        });
+
+        // Mobile phone float-in
+        document.querySelectorAll('.project-mobile-float').forEach(phone => {
+            gsap.from(phone, {
+                y: 80, opacity: 0, duration: 0.7,
+                ease: 'power3.out', delay: 0.3,
+                scrollTrigger: {
+                    trigger: phone.closest('.project-card'),
+                    start: 'top 70%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        });
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+
+                projectCards.forEach(card => {
+                    const category = card.dataset.category;
+                    if (filter === 'all' || category === filter) {
+                        gsap.to(card, { opacity: 1, scale: 1, height: 'auto', duration: 0.4, ease: 'power2.out', display: 'grid' });
+                    } else {
+                        gsap.to(card, { opacity: 0, scale: 0.97, height: 0, duration: 0.3, ease: 'power2.in', display: 'none' });
+                    }
+                });
+            });
+        });
+
+        // CTA reveal
+        gsap.from('.portfolio-cta', {
+            opacity: 0, y: 30, duration: 0.6,
+            scrollTrigger: { trigger: '.portfolio-cta', start: 'top 85%' }
+        });
+    </script>
+
+</body>
+</html>
